@@ -4,7 +4,7 @@ git status
 git init
 git add file name/-
 git commit -m "msg"
-gti remote add origin repo url
+git remote add origin repo url
 git branch -M main
 git push -u origin main
 
