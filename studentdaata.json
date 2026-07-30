@@ -1,0 +1,92 @@
+[
+  {
+    "id": 101,
+    "name": "Aarav Sharma",
+    "age": 20,
+    "gender": "Male",
+    "department": "Computer Science",
+    "year": 2,
+    "cgpa": 8.5
+  },
+  {
+    "id": 102,
+    "name": "Priya Verma",
+    "age": 19,
+    "gender": "Female",
+    "department": "Information Technology",
+    "year": 1,
+    "cgpa": 9.1
+  },
+  {
+    "id": 103,
+    "name": "Rohan Singh",
+    "age": 21,
+    "gender": "Male",
+    "department": "Electronics",
+    "year": 3,
+    "cgpa": 8.2
+  },
+  {
+    "id": 104,
+    "name": "Sneha Gupta",
+    "age": 20,
+    "gender": "Female",
+    "department": "Mechanical",
+    "year": 2,
+    "cgpa": 8.8
+  },
+  {
+    "id": 105,
+    "name": "Aditya Kumar",
+    "age": 22,
+    "gender": "Male",
+    "department": "Civil",
+    "year": 4,
+    "cgpa": 7.9
+  },
+  {
+    "id": 106,
+    "name": "Ananya Mishra",
+    "age": 19,
+    "gender": "Female",
+    "department": "Computer Science",
+    "year": 1,
+    "cgpa": 9.4
+  },
+  {
+    "id": 107,
+    "name": "Vivek Yadav",
+    "age": 21,
+    "gender": "Male",
+    "department": "Electrical",
+    "year": 3,
+    "cgpa": 8.0
+  },
+  {
+    "id": 108,
+    "name": "Kavya Jain",
+    "age": 20,
+    "gender": "Female",
+    "department": "Computer Science",
+    "year": 2,
+    "cgpa": 9.0
+  },
+  {
+    "id": 109,
+    "name": "Rahul Mehta",
+    "age": 22,
+    "gender": "Male",
+    "department": "Information Technology",
+    "year": 4,
+    "cgpa": 8.3
+  },
+  {
+    "id": 110,
+    "name": "Neha Saxena",
+    "age": 21,
+    "gender": "Female",
+    "department": "Artificial Intelligence",
+    "year": 3,
+    "cgpa": 9.2
+  }
+]

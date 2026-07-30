@@ -26,23 +26,48 @@
 //create a promise that will print username and password using resolve and reject
 //and if username and password not found then it will call
 //reject state and print error message
-const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        let error = false; 
-        if (!error) {
-            const username = "admin";
-            const password = "password123";
-            if (username === "admin" && password === "password123") {
-                resolve({ username, password });
-            } else {
-                reject(new Error("Invalid username or password"));
-            }
-        }
-    }, 2000);
-});
+// const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         let error = false; 
+//         if (!error) {
+//             const username = "admin";
+//             const password = "password123";
+//             if (username === "admin" && password === "password123") {
+//                 resolve({ username, password });
+//             } else {
+//                 reject(new Error("Invalid username or password"));
+//             }
+//         }
+//     }, 2000);
+// });
 
-promise.then((result) => {
-    console.log("Username:", result.username);
-}).catch((error) => {
-    console.error("Error:", error.message);
-});
+// promise.then((result) => {
+//     console.log("Username:", result.username);
+//     console.log("Password:", result.password);
+// }).catch((error) => {
+//     console.error("Error:", error.message);
+// });
+// async function test(){
+// console.log("test function");
+// const response =fetch("./studentdaata.json");
+// await response.json().then((data)=>{
+//     console.log(data);
+// });
+// }
+// test();
+// console.log("test function completed");
+async function test() {
+  console.log("message:1");
+
+  try {
+    const response = await fetch("./studentdaata.json");
+    const stdn = await response.json();
+    console.log(stdn);
+    console.log("message 3");
+    return stdn;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+test();
