@@ -1,9 +1,0 @@
-{
-  "name": "backend-fsd",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "start": "node Day6/server.js"
-  }
-}
