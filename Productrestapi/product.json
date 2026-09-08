@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "price": 1499,
+    "category": "Electronics",
+    "description": "High-quality wireless headphones with clear sound.",
+    "inStock": true,
+    "rating": 4.5
+  },
+  {
+    "id": 2,
+    "name": "Smart Watch",
+    "price": 2499,
+    "category": "Electronics",
+    "description": "Smart watch with fitness tracking and notifications.",
+    "inStock": true,
+    "rating": 4.3
+  },
+  {
+    "id": 3,
+    "name": "Cotton T-Shirt",
+    "price": 599,
+    "category": "Clothing",
+    "description": "Comfortable cotton t-shirt for everyday wear.",
+    "inStock": true,
+    "rating": 4.2
+  },
+  {
+    "id": 4,
+    "name": "Laptop Backpack",
+    "price": 1299,
+    "category": "Accessories",
+    "description": "Durable backpack with a dedicated laptop compartment.",
+    "inStock": false,
+    "rating": 4.6
+  },
+  {
+    "id": 5,
+    "name": "Coffee Mug",
+    "price": 299,
+    "category": "Home",
+    "description": "Ceramic coffee mug suitable for everyday use.",
+    "inStock": true,
+    "rating": 4.1
+  },
+  {
+    "id": 6,
+    "name": "Bluetooth Speaker",
+    "price": 1899,
+    "category": "Electronics",
+    "description": "Portable Bluetooth speaker with powerful sound.",
+    "inStock": true,
+    "rating": 4.4
+  },
+  {
+    "id": 7,
+    "name": "Denim Jeans",
+    "price": 1199,
+    "category": "Clothing",
+    "description": "Comfortable and stylish denim jeans for casual wear.",
+    "inStock": true,
+    "rating": 4.3
+  },
+  {
+    "id": 8,
+    "name": "Table Lamp",
+    "price": 799,
+    "category": "Home",
+    "description": "Modern table lamp suitable for study and bedroom use.",
+    "inStock": true,
+    "rating": 4.2
+  },
+  {
+    "id": 9,
+    "name": "Yoga Mat",
+    "price": 699,
+    "category": "Sports",
+    "description": "Soft and non-slip yoga mat for workouts and exercise.",
+    "inStock": true,
+    "rating": 4.5
+  },
+  {
+    "id": 10,
+    "name": "Notebook",
+    "price": 199,
+    "category": "Stationery",
+    "description": "Premium ruled notebook for notes and daily writing.",
+    "inStock": true,
+    "rating": 4.1
+  },
+  {
+    "id": 12,
+    "name": "xyz",
+    "price": "2541"
+  }
+]
