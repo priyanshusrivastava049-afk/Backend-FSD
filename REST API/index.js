@@ -1,47 +1,50 @@
 import express from 'express';
 const app = express();
 app.use(express.json());
-let users=[
-    { id: 1, name: "Nirjara", email: "nirjara@example.com" },
-    { id: 2, name: "Pavni", email: "pavni@example.com" }
+
+let users = [
+    { id: 1, name: "Pushpendra", email: "pushpendra@example.com" },
+    { id: 2, name: "Vansh", email: "vansh@example.com" }
 ];
 
-//Get :get request to fetch all users
-app.get('/users',(req,res)=>{
+// GET: fetch all users
+app.get('/users', (req, res) => {
     res.json(users);
 });
-//Post :post request to create a new user
-app.post('/users',(req,res)=>{
-const user={
-    id:users.length+1,
-    name:req.body.name,
-    email:req.body.email
-};
-users.push(user);
-res.json(user);
-});
-//PUT:request to update a user
-app.put('/users/:id',(req,res)=>{
-    let user=users.find(u=>u.id==req.params.id);
-    user.name=req.body.name;
-    user.email=req.body.email;
-    res.send("user updated successfully");
-     
+
+// POST: create a new user
+app.post('/users', (req, res) => {
+    const user = {
+        id: users.length + 1,
+        name: req.body.name,
+        email: req.body.email
+    };
+    users.push(user);
     res.json(user);
-    //DELETE:request to delete a user
-    app.delete('/users/:id',(req,res)=>{
-        users=users.filter(u=>u.id!=req.params.id);
-        res.send("user deleted successfully");})
 });
 
-app.listen(8000,()=>{
-    console.log('Server is running on port http://localhost:8000');
+// PUT: update a user by id
+app.put('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const user = users.find(u => u.id === userId);
+
+    if (!user) {
+        return res.status(404).send('User not found');
+    }
+
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    res.json(user);
 });
-//Create a PRODUCT REST API and test all method in THUNDER CLIENT
-//work it on approx 100 products and test all the methods in THUNDER CLIENT
-//Structure
-//1. create folder productrestapi
-//2. create index.js file
-//3.create a product.json
-//4.install npm init :package.json
-//5.install express: npm i express :package_lock.json
+
+// DELETE: delete a user by id
+app.delete('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    users = users.filter(u => u.id !== userId);
+    res.send('User deleted successfully');
+});
+
+app.listen(8000, () => {
+    console.log('Server is running on http://localhost:8000');
+});

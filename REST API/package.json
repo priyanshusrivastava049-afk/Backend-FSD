@@ -1,15 +1,24 @@
 {
-  "name": "rest-api",
+  "name": "backend-fsd",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/priyanshusrivastava049-afk/Backend-FSD#readme",
+  "bugs": {
+    "url": "https://github.com/priyanshusrivastava049-afk/Backend-FSD/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyanshusrivastava049-afk/Backend-FSD.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "Day2.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "exxpress": "^1.0.0"
-  }
+    "express": "^5.2.1"
+  },
+  "devDependencies": {}
 }
