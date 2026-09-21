@@ -1,6 +1,12 @@
 import express from "express";
 import fs from "fs";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const productsFile = path.join(__dirname, "products.json");
 
 const app = express();
 
@@ -9,7 +15,7 @@ app.use(express.json());
 
 // GET products
 app.get("/api/products", (req, res) => {
-  const data = fs.readFileSync("products.json", "utf-8");
+  const data = fs.readFileSync(productsFile, "utf-8");
 
   const products = JSON.parse(data);
 
@@ -18,7 +24,7 @@ app.get("/api/products", (req, res) => {
 
 // POST product
 app.post("/api/products", (req, res) => {
-  const data = fs.readFileSync("products.json", "utf-8");
+  const data = fs.readFileSync(productsFile, "utf-8");
 
   const products = JSON.parse(data);
 
@@ -31,14 +37,14 @@ app.post("/api/products", (req, res) => {
 
   products.push(newProduct);
 
-  fs.writeFileSync("products.json", JSON.stringify(products, null, 2));
+  fs.writeFileSync(productsFile, JSON.stringify(products, null, 2));
 
   res.json(newProduct);
 });
 
 // DELETE product
 app.delete("/api/products/:id", (req, res) => {
-  const data = fs.readFileSync("products.json", "utf-8");
+  const data = fs.readFileSync(productsFile, "utf-8");
 
   let products = JSON.parse(data);
 
@@ -46,7 +52,7 @@ app.delete("/api/products/:id", (req, res) => {
 
   products = products.filter((product) => product.id !== id);
 
-  fs.writeFileSync("products.json", JSON.stringify(products, null, 2));
+  fs.writeFileSync(productsFile, JSON.stringify(products, null, 2));
 
   res.json({
     message: "Product deleted successfully",

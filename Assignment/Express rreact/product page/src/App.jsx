@@ -72,95 +72,85 @@ function App() {
 
 
   return (
-    <div>
+    <div className="page-shell">
+      <div className="dashboard-card">
+        <header className="topbar">
+          <div>
+            <p className="eyebrow">Inventory dashboard</p>
+            <h1>Product Management System</h1>
+          </div>
+          <div className="badge">{products.length} items</div>
+        </header>
 
-      <h1>Product Management System</h1>
+        <form className="product-form" onSubmit={addProduct}>
+          <div className="input-group">
+            <label>Product Name</label>
+            <input
+              type="text"
+              placeholder="Enter product name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
+          <div className="input-group">
+            <label>Price</label>
+            <input
+              type="number"
+              placeholder="Enter price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
 
-      {/* Add Product Form */}
+          <div className="input-group">
+            <label>Category</label>
+            <input
+              type="text"
+              placeholder="Enter category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
 
-      <form onSubmit={addProduct}>
+          <button type="submit" className="primary-btn">
+            Add Product
+          </button>
+        </form>
 
-        <input
-          type="text"
-          placeholder="Product Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-        <input
-          type="number"
-          placeholder="Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
-
-        <button type="submit">
-          Add Product
-        </button>
-
-      </form>
-
-
-      <hr />
-
-
-      {/* Product Table */}
-
-      <table border="1" cellPadding="10">
-
-        <thead>
-
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Action</th>
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          {products.map((product) => (
-
-            <tr key={product.id}>
-
-              <td>{product.id}</td>
-
-              <td>{product.name}</td>
-
-              <td>₹{product.price}</td>
-
-              <td>{product.category}</td>
-
-              <td>
-
-                <button
-                  onClick={() => deleteProduct(product.id)}
-                >
-                  Delete
-                </button>
-
-              </td>
-
-            </tr>
-
-          ))}
-
-        </tbody>
-
-      </table>
-
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.id}>
+                  <td>#{product.id}</td>
+                  <td>{product.name}</td>
+                  <td>₹{product.price}</td>
+                  <td><span className="tag">{product.category}</span></td>
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteProduct(product.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
