@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function App() {
 
   const [products, setProducts] = useState([]);
@@ -11,9 +13,7 @@ function App() {
   // Get Products
   const getProducts = async () => {
 
-    const response = await fetch(
-      "http://localhost:5000/api/products"
-    );
+    const response = await fetch(`${API_URL}/api/products`);
 
     const data = await response.json();
 
@@ -37,7 +37,7 @@ function App() {
       category: category
     };
 
-    await fetch("http://localhost:5000/api/products", {
+    await fetch(`${API_URL}/api/products`, {
       method: "POST",
 
       headers: {
@@ -61,7 +61,7 @@ function App() {
   const deleteProduct = async (id) => {
 
     await fetch(
-      `http://localhost:5000/api/products/${id}`,
+      `${API_URL}/api/products/${id}`,
       {
         method: "DELETE"
       }
