@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Campus Help Desk</title>
+	<link rel="stylesheet" href="style%20.css">
+</head>
+<body>
+	<main class="page-shell">
+		<header class="hero">
+			<p class="eyebrow">Student support portal</p>
+			<h2>Campus Help Desk</h2>
+			<p>Tell us what you need. Your request will be tracked by the campus support team.</p>
+		</header>
+		<section class="panel" aria-labelledby="form-title">
+			<div class="section-heading"><div><p class="eyebrow">New ticket</p><h2 id="form-title">Submit a request</h2></div><span id="form-mode" class="mode-label">Create</span></div>
+			<form id="request-form">
+				<div class="form-grid">
+					<label>Student Name<input id="studentName" name="studentName" required></label>
+					<label>Email<input id="email" name="email" type="email" required></label>
+					<label>Category<select id="category" name="category" required><option value="">Choose a category</option><option>Academic</option><option>Facilities</option><option>Technology</option><option>Transport</option><option>Other</option></select></label>
+					<label>Priority<select id="priority" name="priority" required><option value="">Choose priority</option><option>Low</option><option>Medium</option><option>High</option></select></label>
+					<label class="full-width">Problem Description<textarea id="description" name="description" rows="4" required></textarea></label>
+				</div>
+				<div class="form-actions"><button type="submit" id="submit-button">Submit request</button><button type="button" id="cancel-button" class="secondary" hidden>Cancel edit</button><span id="status" role="status"></span></div>
+			</form>
+		</section>
+		<section class="requests-section" aria-labelledby="requests-title">
+			<div class="section-heading"><div><p class="eyebrow">Live queue</p><h2 id="requests-title">Submitted requests</h2></div><span id="request-count" class="count">0 requests</span></div>
+			<div id="requests-list" class="requests-list"></div>
+		</section>
+	</main>
+	<script>
+		const form = document.querySelector("#request-form");
+		const requestsList = document.querySelector("#requests-list");
+		const statusMessage = document.querySelector("#status");
+		const submitButton = document.querySelector("#submit-button");
+		const cancelButton = document.querySelector("#cancel-button");
+		const formMode = document.querySelector("#form-mode");
+		const requestCount = document.querySelector("#request-count");
+		let editingId = null;
+
+		function showStatus(message, isError = false) { statusMessage.textContent = message; statusMessage.className = isError ? "error" : "success"; }
+		function requestCard(request) {
+			const card = document.createElement("article");
+			card.className = "request-card";
+			card.innerHTML = `<div class="request-card-header"><div><span class="category">${request.category}</span><h3>${request.studentName}</h3></div><span class="priority ${request.priority.toLowerCase()}">${request.priority}</span></div><p class="email">${request.email}</p><p class="description">${request.description}</p><div class="card-actions"><button class="edit-button" data-id="${request.id}">Edit</button><button class="delete-button" data-id="${request.id}">Delete</button></div>`;
+			return card;
+		}
+		async function loadRequests() {
+			const response = await fetch("/api/requests");
+			if (!response.ok) throw new Error("Unable to load requests.");
+			const requests = await response.json();
+			requestsList.replaceChildren(...requests.map(requestCard));
+			requestCount.textContent = `${requests.length} request${requests.length === 1 ? "" : "s"}`;
+			if (!requests.length) requestsList.innerHTML = '<p class="empty-state">No requests yet. Your queue is clear.</p>';
+		}
+		function setFormValues(request) {
+			Object.entries(request).forEach(([key, value]) => { if (form.elements[key]) form.elements[key].value = value; });
+			editingId = request.id; submitButton.textContent = "Save changes"; cancelButton.hidden = false; formMode.textContent = "Editing"; form.scrollIntoView({ behavior: "smooth", block: "start" });
+		}
+		function resetForm() { form.reset(); editingId = null; submitButton.textContent = "Submit request"; cancelButton.hidden = true; formMode.textContent = "Create"; }
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const data = Object.fromEntries(new FormData(form));
+			const url = editingId ? `/api/requests/${editingId}` : "/api/requests";
+			try {
+				const response = await fetch(url, { method: editingId ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+				if (!response.ok) throw new Error((await response.json()).error);
+				const wasEditing = Boolean(editingId); resetForm(); showStatus(wasEditing ? "Request updated." : "Request submitted."); await loadRequests();
+			} catch (error) { showStatus(error.message, true); }
+		});
+		requestsList.addEventListener("click", async (event) => {
+			const id = event.target.dataset.id;
+			if (!id) return;
+			if (event.target.classList.contains("edit-button")) { const response = await fetch(`/api/requests/${id}`); setFormValues(await response.json()); }
+			if (event.target.classList.contains("delete-button") && confirm("Delete this request?")) { const response = await fetch(`/api/requests/${id}`, { method: "DELETE" }); if (response.ok) { showStatus("Request deleted."); await loadRequests(); } }
+		});
+		cancelButton.addEventListener("click", resetForm);
+		loadRequests().catch((error) => showStatus(error.message, true));
+	</script>
+</body>
+</html>
